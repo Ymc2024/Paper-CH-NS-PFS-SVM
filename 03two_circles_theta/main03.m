@@ -36,7 +36,7 @@ tsave = [0.1  1 5];
 
 %% pde
 dt_ref = 1e-4;
-pde = ex03_3_SFdata(para);
+pde = ex03_2_SFdata(para);
 %% Space: Domain and N
 domain.left   = 0;
 domain.right  = 2*pi;
@@ -44,11 +44,11 @@ domain.bottom = 0;
 domain.top    = 2*pi;
 Nx = 128; Ny = Nx;
 
-maxIt = length(dt_array);
+maxIt = length(dt_ref);
 
 % scheme = 's1st';   % First-order scheme
-scheme = 's2cn';   % Second-order CN scheme, no need to write
-% scheme = 's2bdf';  % Second-order BDF scheme
+%scheme = 's2cn';   % Second-order CN scheme, no need to write
+scheme = 's2bdf';  % Second-order BDF scheme
 
 %% option
 option.scheme = scheme;
@@ -61,15 +61,15 @@ option.energyflag = 0;
 option.tol = 1e-14;
 option.tolit = 1e-12;
 option.maxit = 2000;
-opyion.type = 'SVM1';
+option.type = 'SVM1';
 
 %% Run:
 time = struct('T',T,'t0',t0,'dt',dt_ref,'Tsplit',Tsplit,'tsave',tsave);
 if 1 == strcmp(scheme,'s1st')
-    % Surfactant_2D_NS_SVM_1st(pde,domain,Nx,Ny,time,option);
-    Surfactant_2D_NS_SVM_1st_modified(pde,domain,Nx,Ny,time,option);
+    Surfactant_2D_NS_SVM_1st(pde,domain,Nx,Ny,time,option);
+    % Surfactant_2D_NS_SVM_1st_modified(pde,domain,Nx,Ny,time,option);
 elseif 1 == strcmp(scheme,'s2cn')
-    Surfactant_2D_NS_SAV_2cn(pde,domain,Nx,Ny,time,option);
+    Surfactant_2D_NS_SVM_2cn(pde,domain,Nx,Ny,time,option);
     % Surfactant_2D_NS_SVM_2cn_modified(pde,domain,Nx,Ny,time,option);
 elseif 1 == strcmp(scheme,'s2bdf')
     Surfactant_2D_NS_SVM_2bdf(pde,domain,Nx,Ny,time,option);
