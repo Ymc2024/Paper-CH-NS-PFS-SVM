@@ -1,0 +1,14 @@
+.idea/misc.xml
+.idea/workspace.xml
+.idea/vcs.xml
+.idea
+
+.DS_Store
+**/.DS_Store
+*.txt
+*.vtu
+*.pvd
+*.mat
+*.png
+*.jpg
+*.eps
